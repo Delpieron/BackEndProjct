@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using StoreApi;
 using StoreApi.Services;
+using System.Threading.Tasks;
 
 namespace StoreApi.Controllers
 {
@@ -21,27 +14,28 @@ namespace StoreApi.Controllers
             _user = user;
         }
         [AllowAnonymous]
+        [ProducesDefaultResponseType(typeof(User))]
         [HttpGet(ApiRoutes.User.GetUserId)]
         public async Task<IActionResult> GetUser([FromRoute] int id)
         {
             var result = await _user.getUser(id);
             return Ok(result);
         }
-        [AllowAnonymous]
+        [ProducesDefaultResponseType(typeof(User))]
         [HttpPost(ApiRoutes.User.AddUserId)]
         public async Task<IActionResult> AddExercise([FromBody] User user)
         {
             var result = await _user.addUser(user);
             return Ok(result);
         }
-       [AllowAnonymous]
+        [ProducesDefaultResponseType(typeof(User))]
         [HttpPut(ApiRoutes.User.EditUserId)]
         public async Task<IActionResult> EditUser([FromBody] User user)
         {
             var result = await _user.editUser(user);
             return Ok(result);
         }
-        [AllowAnonymous]
+        [ProducesDefaultResponseType(typeof(User))]
         [HttpDelete(ApiRoutes.User.DeleteUserId)]
         public async Task<IActionResult> DeleteUser([FromRoute] int id)
         {

@@ -1,8 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace StoreApi.Services
@@ -34,7 +30,7 @@ namespace StoreApi.Services
         }
         public async Task<bool> deleteUser(int id)
         {
-            var user= await getUser(id);
+            var user = await getUser(id);
             if (user == null) return false;
             DbContext.user.Remove(user);
             int result = await DbContext.SaveChangesAsync();
