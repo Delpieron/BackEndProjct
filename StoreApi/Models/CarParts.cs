@@ -1,6 +1,6 @@
 ﻿namespace StoreApi.Models
 {
-    public class CarParts
+    public class CarPart
     {
         public int Id { get; set; }
         public decimal Price { get; set; }

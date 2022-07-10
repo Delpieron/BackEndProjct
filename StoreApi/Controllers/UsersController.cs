@@ -23,7 +23,7 @@ namespace StoreApi.Controllers
         }
         [ProducesDefaultResponseType(typeof(User))]
         [HttpPost(ApiRoutes.User.AddUserId)]
-        public async Task<IActionResult> AddExercise([FromBody] User user)
+        public async Task<IActionResult> AddUser([FromBody] User user)
         {
             var result = await _user.addUser(user);
             return Ok(result);

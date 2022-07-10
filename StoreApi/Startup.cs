@@ -28,6 +28,9 @@ namespace StoreApi
             services.AddSwaggerGen();
             services.AddDbContext<DataContext>(options => options.UseSqlite("Data Source=Store.db"));
             services.AddScoped<IUser, UserService>();
+            services.AddScoped<IPermission, PermissionService>();
+            services.AddScoped<ICar, CarService>();
+            services.AddScoped<ICarPart, CarPartService>();
             services.AddSwaggerGen(c =>
             {
 
