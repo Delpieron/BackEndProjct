@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace StoreApi.Services
@@ -35,6 +36,11 @@ namespace StoreApi.Services
             DbContext.Car.Remove(car);
             int result = await DbContext.SaveChangesAsync();
             return result >= 0;
+        }
+
+        public async Task<List<Car>> getCars()
+        {
+            return await DbContext.Car.ToListAsync();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StoreApi.Model;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace StoreApi.Services
@@ -36,6 +37,11 @@ namespace StoreApi.Services
             DbContext.Permission.Remove(permission);
             int result = await DbContext.SaveChangesAsync();
             return result >= 0;
+        }
+
+        public async Task<List<Permission>> getPermissions()
+        {
+            return await DbContext.Permission.ToListAsync();
         }
     }
 }

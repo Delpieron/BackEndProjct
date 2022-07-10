@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StoreApi.Models;
 using StoreApi.Services;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace StoreApi.Controllers
@@ -15,9 +16,17 @@ namespace StoreApi.Controllers
             _carPart = carPart;
         }
         [AllowAnonymous]
+        [ProducesDefaultResponseType(typeof(List<CarPart>))]
+        [HttpGet(ApiRoutes.CarParts.GetCarParts)]
+        public async Task<IActionResult> GetUser()
+        {
+            var result = await _carPart.getCarParts();
+            return Ok(result);
+        }
+        [AllowAnonymous]
         [ProducesDefaultResponseType(typeof(CarPart))]
         [HttpGet(ApiRoutes.CarParts.GetCarPartsId)]
-        public async Task<IActionResult> GetUser([FromRoute] int id)
+        public async Task<IActionResult> GetCarPart([FromRoute] int id)
         {
             var result = await _carPart.getCarPart(id);
             return Ok(result);

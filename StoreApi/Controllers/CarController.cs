@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StoreApi.Services;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace StoreApi.Controllers
@@ -14,6 +15,14 @@ namespace StoreApi.Controllers
             _car = car;
         }
         [AllowAnonymous]
+        [ProducesDefaultResponseType(typeof(List<Car>))]
+        [HttpGet(ApiRoutes.Car.GetCars)]
+        public async Task<IActionResult> GetCars()
+        {
+            var result = await _car.getCars();
+            return Ok(result);
+        }
+        [AllowAnonymous]
         [ProducesDefaultResponseType(typeof(Car))]
         [HttpGet(ApiRoutes.Car.GetCarId)]
         public async Task<IActionResult> GetCar([FromRoute] int id)
@@ -25,6 +34,10 @@ namespace StoreApi.Controllers
         [HttpPost(ApiRoutes.Car.AddCarId)]
         public async Task<IActionResult> AddCar([FromBody] Car car)
         {
+            if (car.Vin.Length != 7 || car.Vin.Length != 17)
+            {
+                return BadRequest("Invalid Vin");
+            }
             var result = await _car.addCar(car);
             return Ok(result);
         }

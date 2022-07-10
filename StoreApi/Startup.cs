@@ -49,6 +49,13 @@ namespace StoreApi
                     }
                 });
             });
+            /*services.AddAuthentication();
+            services.AddAuthorization(options =>
+            {
+                options.FallbackPolicy =
+                new AuthorizationPolicyBuilder().AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                .RequireAuthenticatedUser().Build();
+            });*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StoreApi.Model;
 using StoreApi.Services;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace StoreApi.Controllers
@@ -13,6 +14,14 @@ namespace StoreApi.Controllers
         public PermissionController(IPermission permission)
         {
             _permission = permission;
+        }
+        [AllowAnonymous]
+        [ProducesDefaultResponseType(typeof(List<Permission>))]
+        [HttpGet(ApiRoutes.Permission.GetPermissions)]
+        public async Task<IActionResult> GetPermissions()
+        {
+            var result = await _permission.getPermissions();
+            return Ok(result);
         }
         [AllowAnonymous]
         [ProducesDefaultResponseType(typeof(Permission))]

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StoreApi.Services;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace StoreApi.Controllers
@@ -12,6 +13,14 @@ namespace StoreApi.Controllers
         public UsersController(IUser user)
         {
             _user = user;
+        }
+        [AllowAnonymous]
+        [ProducesDefaultResponseType(typeof(List<User>))]
+        [HttpGet(ApiRoutes.User.GetUsers)]
+        public async Task<IActionResult> GetUser()
+        {
+            var result = await _user.getUsers();
+            return Ok(result);
         }
         [AllowAnonymous]
         [ProducesDefaultResponseType(typeof(User))]
